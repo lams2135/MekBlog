@@ -1,0 +1,5 @@
+username:string
+password:string
+
+theme:[{name:string, src:string}]
+

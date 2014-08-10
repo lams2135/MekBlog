@@ -1,0 +1,10 @@
+# keys in DBModeling often :
+# * not involve permission-safe
+# * queried not frequently
+# * volume might be large
+
+collection archive = {title:string, smtitle:string, content:string, posttime:date, lastedittime:date, tag:[string], _id:system}
+collection review = {archiveid:id, name:string, email:email, content:string, posttime:date, revfather:id} # revfather = 0 | review._id
+collection single = :
+  {name='tag':string, tag:[string]}
+

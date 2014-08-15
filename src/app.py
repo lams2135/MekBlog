@@ -84,9 +84,10 @@ def new_archive():
 		collection = conn.MekBlog.archive
 		if collection.find_one({'small-title':request.form['small-title']}):
 			return render_template('error.html', error_msg='Same SMALL-TITLE already exists in another archive.')
+		# TODO: anti-dangerous-small-title(CSA)
 		collection.insert({
 			'title': request.form['title'],
-			'small-title': request.form['small-title'],
+			'small-title': request.form['small-title'].replace(' ','-'),
 			'content': request.form['content'],
 			'tag': request.form['tag'].split(','),
 			'post-time': datetime.datetime.utcnow().isoformat(),

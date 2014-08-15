@@ -1,5 +1,8 @@
-username:string
-password:string
+root-user:string
+root-passwd:string
+db-host:string
+db-port:int
+archives-in-a-page:20
 
 theme:[{name:string, src:string}]
 

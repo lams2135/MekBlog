@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}{{ archive['title'] }}{% endblock %}
+{% block content %}
+<h1>{{ archive['title'] }}</h1>
+<h3>POST AT {{ archive['post-time'] }}</h3>
+<h3>TAG:{% for tag in archive['tag'] %} {{ tag }}{% endfor %}</h3>
+<br>
+<p>{{ archive['content'] }}</p>
+<br>
+<h3>--EOF--</h3>
+{% endblock %}

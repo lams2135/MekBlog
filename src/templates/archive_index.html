@@ -1,0 +1,17 @@
+{% extends "base.html"%}
+{% block title %}archives{% endblock %}
+{% block content %}
+<h1>archive index</h1>
+<table>
+	{% for item in archive_list %}
+	<tr>
+		<th>
+		<a href="{{ url_for('archive_index') }}/{{ item['small-title'] }}">{{ item['title'] }}</a>
+		</th>
+		<th>
+		TODO:DELETE
+		</th>
+	</tr>
+	{% endfor %}
+</table>
+{% endblock %}

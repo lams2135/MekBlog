@@ -1,0 +1,7 @@
+{
+	"root-user":"root",
+	"root-passwd":"lovecirculation",
+	"db-host":"localhost",
+	"db-port":27017,
+	"archives-in-a-page":20
+}

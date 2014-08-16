@@ -1,8 +1,9 @@
 from flask import *
 import pymongo
 import os
-
 import mekblog
+from mekblog.security import antiXSS
+
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -78,7 +79,7 @@ def new_archive():
 		# TODO: anti-dangerous-small-title(CSA)
 		result, msg = mekblog.archive.post({
 			'title': request.form['title'],
-			'small-title': request.form['small-title'],
+			'small-title': antiXSS(request.form['small-title']),
 			'content': request.form['content'],
 			'tag': request.form['tag'],
 		})

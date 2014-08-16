@@ -1,7 +1,8 @@
 from flask import *
 import os
-
 import mekblog
+from mekblog.security import antiXSS
+
 
 # initial
 app = Flask(__name__)
@@ -79,10 +80,9 @@ def new_archive():
 		return render_template('new-archive.html')
 	else:
 		# TODO: forward: check script
-		# TODO: anti-dangerous-small-title(CSA)
 		result, msg = mekblog.archive.post({
 			'title': request.form['title'],
-			'small-title': request.form['small-title'],
+			'small-title': antiXSS(request.form['small-title']),
 			'content': request.form['content'],
 			'tag': request.form['tag'],
 		})

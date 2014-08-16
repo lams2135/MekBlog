@@ -1,5 +1,4 @@
 import re
-from log import write_log
 
 # filter type
 filter_list = []

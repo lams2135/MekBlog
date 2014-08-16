@@ -1,7 +1,6 @@
 from flask import *
 import os
 import mekblog
-from mekblog.security import antiXSS
 
 
 # initial
@@ -82,7 +81,7 @@ def new_archive():
 		# TODO: forward: check script
 		result, msg = mekblog.archive.post({
 			'title': request.form['title'],
-			'small-title': antiXSS(request.form['small-title']),
+			'small-title': mekblog.security.antiXSS(request.form['small-title']),
 			'content': request.form['content'],
 			'tag': request.form['tag'],
 		})

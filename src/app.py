@@ -1,13 +1,16 @@
 from flask import *
-import pymongo
 import os
 
 import mekblog
 
+# initial
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 mekblog.config.load('config.json')
-mekblog.archive.connect_db()
+mekblog.db.connect()
+mekblog.archive.connect()
+mekblog.tag.connect()
+mekblog.tag.update()
 
 # user access page
 
@@ -23,7 +26,8 @@ def archive_index():
 	else:
 		opt = {}
 	archive_list = mekblog.archive.list_all(opt)
-	return render_template('archive_index.html', archive_list=archive_list)
+	tag_list = mekblog.tag.collection
+	return render_template('archive_index.html', archive_list=archive_list, tag_list=[{'tag':x.keys()[0],'count':x.values()[0]} for x in tag_list])
 
 @app.route('/archives/<small_title>')
 def read_archives(small_title):
@@ -86,6 +90,7 @@ def new_archive():
 		if not result:
 			return render_template('error.html', error_msg=msg)
 		else:
+			mekblog.tag.insert(request.form['tag'])
 			return redirect(url_for('index'))
 	
 # TODO: ajax access page

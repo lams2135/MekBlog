@@ -17,4 +17,10 @@
 	<b>Sorry there's no archive in the given collection</b>
 	{% endif %}
 </table>
+<br>
+<h1>hot tags</h1>
+{% for item in tag_list %}
+<a href="{{ url_for('archive_index',tag=item['tag']) }}">{{ item['tag'] }}</a>
+<font>[debug num={{ item['count'] }}] | </font>
+{% endfor %}
 {% endblock %}

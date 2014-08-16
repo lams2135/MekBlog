@@ -1,15 +1,14 @@
 import json
+import mekblog.db
 
 settings = {}
-ready = False
 
 def load(filename):
 	global settings
-	global ready
 	fp = open(filename, 'r')
 	settings = json.load(fp)
-	ready = True
 	fp.close()
+	mekblog.db.connect()
 	return settings
 
 # better not pass 'obj' as argument

@@ -1,18 +1,13 @@
 import pymongo
 import datetime
 
-import mekblog.config
+import mekblog
 
 db_connect = None
 
-def connect_db():
+def connect():
 	global db_connect
-	if 'db-host' not in mekblog.config.settings or 'db-port' not in mekblog.config.settings:
-		conn = pymongo.Connection('0.0.0.0', 27017)
-		raise ValueError('mekblog.config not load or missing keys')
-	else:
-		conn = pymongo.Connection(mekblog.config.settings['db-host'], mekblog.config.settings['db-port'])
-	db_connect = conn.MekBlog.archive
+	db_connect = mekblog.db.db_connect.MekBlog.archive
 
 def list_all(query_obj):
 	return db_connect.find(query_obj).sort([('post-time', -1)])
@@ -27,7 +22,7 @@ def post(inform):
 		'title': inform['title'],
 		'small-title': inform['small-title'].replace(' ', '-'),
 		'content': inform['content'],
-		'tag': inform['tag'].split(','),
+		'tag': [x.strip() for x in inform['tag'].split(',')],
 		'post-time': datetime.datetime.utcnow().isoformat(),
 		'last-edit-time': datetime.datetime.utcnow().isoformat()
 	}

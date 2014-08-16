@@ -13,5 +13,8 @@
 		</th>
 	</tr>
 	{% endfor %}
+	{% if not archive_list.count() %}
+	<b>Sorry there's no archive in the given collection</b>
+	{% endif %}
 </table>
 {% endblock %}

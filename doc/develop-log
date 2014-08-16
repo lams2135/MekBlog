@@ -2,5 +2,6 @@
 [2014.08.13] first skeleton finishes
 [2014.08.15] real skeleton finishes
 [2014.08.15] add: json-config
+[2014.08.16] refactoring & review
 
-[things to do] anti-CSA, review-tree, forward-script, forward-layout, theme-package
+[things to do] anti-XSS, review-tree, forward-script, forward-layout, theme-package

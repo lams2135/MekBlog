@@ -1,14 +1,13 @@
 from flask import *
 import pymongo
-import json
-import datetime
 import os
 
-app_config = __import__('app-config')
+import mekblog
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
-blog_config = app_config.load('config.json')
+mekblog.config.load('config.json')
+mekblog.archive.connect_db()
 
 # user access page
 
@@ -20,23 +19,19 @@ def index():
 @app.route('/archives')
 def archive_index():
 	if 'tag' in request.args:
-		tag = request.args['tag']
+		opt = {'tag': request.args['tag']}
 	else:
-		tag = 'none'
-	# TODO : add tags
-	conn = pymongo.Connection(blog_config['db-host'], blog_config['db-port'])
-	archive_list = conn.MekBlog.archive.find().sort([('post-time',-1)]).limit(blog_config['archives-in-a-page'])
+		opt = {}
+	archive_list = mekblog.archive.list_all(opt)
 	return render_template('archive_index.html', archive_list=archive_list)
 
 @app.route('/archives/<small_title>')
 def read_archives(small_title):
-	conn = pymongo.Connection(blog_config['db-host'], blog_config['db-port'])
-	collection = conn.MekBlog.archive
-	arch = collection.find_one({'small-title': small_title})
-	if arch == None:
+	archive = mekblog.archive.list_one({'small-title': small_title})
+	if archive == None:
 		abort(404)
 	else:
-		return render_template('archive.html', archive=arch)
+		return render_template('archive.html', archive=archive)
 
 # TODO : add review functions
 
@@ -51,7 +46,7 @@ def login():
 			return render_template('login.html')
 	else:
 		if 'username' in request.form and 'password' in request.form:
-			if request.form['username'] == blog_config['root-user'] and request.form['password'] ==  blog_config['root-passwd']:
+			if request.form['username'] == mekblog.config.settings['root-user'] and request.form['password'] ==  mekblog.config.settings['root-passwd']:
 				session['admin'] = 'YES'
 				return redirect(url_for('admin'))
 			else:
@@ -61,14 +56,14 @@ def login():
 
 @app.route('/logout')
 def logout():
-	session['admin'] = 'NONE'
+	session['admin'] = 'None'
 	session.pop('admin', None)
 	return redirect(url_for('index'))
 
 @app.route('/admin')
 def admin():
 	if 'admin' in session:
-		return render_template('admin.html', root_user=blog_config['root-user'])
+		return render_template('admin.html', root_user=mekblog.config.settings['root-user'])
 	else:
 		abort(403)
 
@@ -80,21 +75,18 @@ def new_archive():
 		return render_template('new-archive.html')
 	else:
 		# TODO: forward: check script
-		conn = pymongo.Connection(blog_config['db-host'], blog_config['db-port'])
-		collection = conn.MekBlog.archive
-		if collection.find_one({'small-title':request.form['small-title']}):
-			return render_template('error.html', error_msg='Same SMALL-TITLE already exists in another archive.')
 		# TODO: anti-dangerous-small-title(CSA)
-		collection.insert({
+		result, msg = mekblog.archive.post({
 			'title': request.form['title'],
-			'small-title': request.form['small-title'].replace(' ','-'),
+			'small-title': request.form['small-title'],
 			'content': request.form['content'],
-			'tag': request.form['tag'].split(','),
-			'post-time': datetime.datetime.utcnow().isoformat(),
-			'last-edit-time': datetime.datetime.utcnow().isoformat()
+			'tag': request.form['tag'],
 		})
 		# TODO: make error & alert page unified
-		return redirect(url_for('index'))
+		if not result:
+			return render_template('error.html', error_msg=msg)
+		else:
+			return redirect(url_for('index'))
 	
 # TODO: ajax access page
 

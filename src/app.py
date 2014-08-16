@@ -76,7 +76,6 @@ def new_archive():
 		return render_template('new-archive.html')
 	else:
 		# TODO: forward: check script
-		# TODO: anti-dangerous-small-title(CSA)
 		result, msg = mekblog.archive.post({
 			'title': request.form['title'],
 			'small-title': antiXSS(request.form['small-title']),

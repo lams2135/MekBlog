@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TEST</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row-fluid">
+	<div class="span12">
+	  <div class="row-fluid">
+	    <div class="span1">
+	    </div>
+	    <div class="span10 ">
+	      <p>HEAD BODY and NAVBAR</p>
+	    </div>
+	    <div class="span1">
+	    </div>
+	  </div>
+	</div>
+      </div>
+      <div class="row-fluid">
+	<div class="span1">
+	</div>
+	<div class="span10">
+	  <h3>Content</h3>
+	  <blockquote>
+	    <p>South Park</p>
+	    <small>It is a anime about how a child beat alience with panci!</small>
+	  </blockquote>
+	</div>
+	<div class="span1">
+	</div>
+      </div>
+      <div class="row-fluid">
+	<div class="span1">
+	</div>
+	<div class="span10">
+	  {% block footer %}
+	  <p>FOOTER - MekBlog</p>
+	  {% endblock %}
+	</div>
+	<div class="span1">
+	</div>
+      </div>
+    </div>
+  </body>
+</html>

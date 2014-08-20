@@ -37,6 +37,10 @@ body { /*
 	text-align:left;
 }
 
+.archive-post {
+	text-align:left;
+}
+
 .archive-view-title {
 	font-size:40px;
 }

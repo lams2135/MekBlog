@@ -29,4 +29,9 @@ def post(inform):
 	db_connect.insert(archive)
 	return True, None
 
+def update(query_obj, inform):
+	db_connect.update()
+
+def remove(query_obj):
+	db_connect.remove(query_obj)
 # TODO: add: edit & delete op

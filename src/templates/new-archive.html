@@ -1,20 +1,43 @@
 {% extends "base.html" %}
 {% block title %}new-archive{% endblock %}
 {% block content %}
-	<form action="{{ url_for('new_archive') }}" method="post">
-		<font color = "#00FF00"> title </font>
-		<input type="text" name="title">
-		<p>
-		<font color = "#00FF00"> content </font>
-		<p>
-		<textarea name="content"></textarea>
-		<p>
-		<font> small title </font>
-		<input type="text" name="small-title">
-		<p>
-		<font> tags(split by comma)</font>
-		<input type="text" name="tag">
-		<p>
-		<input type="submit" value="submit">
-	</form>
+<div class="tile archive-post">
+  <div class="row">
+    <hr>
+    <div class="col-sm-11">
+      <form class="form-horizontal" action="{{ url_for('new_archive') }}" method="post">
+	<div class="form-group">
+	  <label for="input-title" class="col-sm-3 control-label">Title</label>
+	  <div class="col-sm-9">
+	    <input type="text" class="form-control" id="input-title" name="title" placeholder="Title">
+	  </div>
+	</div>
+	<div class="form-group">
+	  <label for="input-small-title" class="col-sm-3 control-label">Small Title</label>
+	  <div class="col-sm-9">
+	    <input type="text" class="form-control" id="input-small-title" name="small-title" placeholder="small-title">
+	  </div>
+	</div>
+	<div class="form-group">
+	  <label for="input-tag" class="col-sm-3 control-label">Tag</label>
+	  <div class="col-sm-9">
+	    <input type="text" class="form-control" id="input-tag" name="tag">
+	  </div>
+	</div>
+	<div class="form-group">
+	  <label for="input-content" class="col-sm-3 control-label">Content</label>
+	  <div class="col-sm-9">
+	    <textarea class="form-control" id="input-content" name="content" placeholder="Content"></textarea>
+	  </div>
+	</div>
+	<div class="form-group">
+	  <div class="col-sm-offset-3 col-sm-9">
+	    <button type="submit" class="btn btn-primary btn-wide">POST</button>
+	  </div>
+	</div>
+      </form>
+    </div>
+    <div class="col-sm-1"></div>
+  </div>
+</div>
 {% endblock %}

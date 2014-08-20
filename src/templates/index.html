@@ -1,14 +1,16 @@
 {% extends "base.html" %}
 {% block title %}Index{% endblock %}
 {% block content %}
-<blockquote>
-  <p>MekBlog</p>
-  <small>MekBlog is a template for personal blog.</small>
-</blockquote>
-<b>This is index body.</b>
-<a href="{{ url_for('archive_index') }}"><b>ARCHIVES</b></a>
-<a href="{{ url_for('login') }}"><b>ADMIN</b></a>
-<br>
+<div class="tile archive-post">
+  <blockquote>
+    <p>MekBlog</p>
+    <small>MekBlog is a template for personal blog.</small>
+  </blockquote>
+  <b>This is index body.</b>
+  <a href="{{ url_for('archive_index') }}"><b>ARCHIVES</b></a>
+  <a href="{{ url_for('login') }}"><b>ADMIN</b></a>
+  <br>
+</div>
 {% endblock %}
 {% block footer %}
 INDEX_FOOTER

@@ -1,11 +1,14 @@
-{% extends "base.html" %}
+{% extends "two-colume.html" %}
 {% block title %}{{ archive['title'] }}{% endblock %}
-{% block content %}
-<h1>{{ archive['title'] }}</h1>
-<h3>POST AT {{ archive['post-time'] }}</h3>
-<h3>TAG:{% for tag in archive['tag'] %} {{ tag }}{% endfor %}</h3>
+{% block container %}
+<div class="tile archive-view opacity">
+<font class="lead archive-view-title">{{ archive['title'] }}</font>
+<p class="archive-view-time">POST AT {{ archive['post-time'][0:10] }}</p>
 <br>
+<small>TAG:{% for tag in archive['tag'] %}  {{ tag }}{% endfor %}</small>
+<hr>
 <p>{{ archive['content'] }}</p>
 <br>
-<h3>--EOF--</h3>
+<b>--EOF--</b>
+</div>
 {% endblock %}

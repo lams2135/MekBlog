@@ -26,8 +26,8 @@ def archive_index():
 	else:
 		opt = {}
 	archive_list = mekblog.archive.list_all(opt)
-	tag_list = mekblog.tag.collection
-	return render_template('archive_index.html', archive_list=archive_list, tag_list=[{'tag':x.keys()[0],'count':x.values()[0]} for x in tag_list])
+	tag_list = [{'tag':x.keys()[0],'count':x.values()[0]} for x in mekblog.tag.collection]
+	return render_template('archive_index.html', archive_list=archive_list, tag_list=tag_list)
 
 @app.route('/archives/<small_title>')
 def read_archives(small_title):
@@ -35,7 +35,8 @@ def read_archives(small_title):
 	if archive == None:
 		abort(404)
 	else:
-		return render_template('archive.html', archive=archive)
+		tag_list = [{'tag':x.keys()[0],'count':x.values()[0]} for x in mekblog.tag.collection]
+		return render_template('archive.html', archive=archive, tag_list=tag_list)
 
 # TODO : add review functions
 

@@ -1,26 +1,21 @@
-{% extends "base.html"%}
+{% extends "two-colume.html" %}
 {% block title %}archives{% endblock %}
-{% block content %}
-<h1>archive index</h1>
+{% block container %}
 <table>
-	{% for item in archive_list %}
-	<tr>
-		<th>
-		<a href="{{ url_for('archive_index') }}/{{ item['small-title'] }}">{{ item['title'] }}</a>
-		</th>
-		<th>
-		TODO:DELETE
-		</th>
-	</tr>
-	{% endfor %}
-	{% if not archive_list.count() %}
-	<b>Sorry there's no archive in the given collection</b>
-	{% endif %}
+  {% for item in archive_list %}
+  <div>
+    <div class="tile opacity archive-view">
+      <a href="{{ url_for('archive_index') }}/{{ item['small-title'] }}"><font class="lead">{{ item['title'] }}</font></a>
+      <small class="archive-view-time">POST at {{ item['post-time'][0:10] }}</small>
+      <p >{% if item['content'].__len__()>100 %}{{ item['content'][0:100] }}{% else %}{{ item['content'] }}{% endif %}</p>
+    </div>
+  </div>
+  {% if not loop.last %}
+  <br>
+  {% endif %}
+  {% endfor %}
+  {% if not archive_list.count() %}
+  <b>Sorry there's no archive in the given collection</b>
+  {% endif %}
 </table>
-<br>
-<h1>hot tags</h1>
-{% for item in tag_list %}
-<a href="{{ url_for('archive_index',tag=item['tag']) }}">{{ item['tag'] }}</a>
-<font>[debug num={{ item['count'] }}] | </font>
-{% endfor %}
 {% endblock %}

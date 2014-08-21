@@ -3,9 +3,13 @@
 {% block content %}
 <div class="tile archive-post">
   <div class="row">
-    <hr>
     <div class="col-sm-11">
       <form class="form-horizontal" action="{{ url_for('new_archive') }}" method="post">
+	<div class="form-group">
+	  <div class="col-sm-offset-3 col-sm-9">
+	    <font class="lead">New Archive</font>
+	  </div>
+	</div>
 	<div class="form-group">
 	  <label for="input-title" class="col-sm-3 control-label">Title</label>
 	  <div class="col-sm-9">

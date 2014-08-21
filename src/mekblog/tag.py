@@ -37,3 +37,6 @@ def insert(inform):
 		else:
 			collection.append({x:1})
 
+def get_list():
+	global collection
+	return [{'tag':x.keys()[0],'count':x.values()[0]} for x in collection]

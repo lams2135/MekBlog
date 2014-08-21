@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 {% block title %}Error{% endblock %}
 {% block content %}
-<h>Something error happened</h>
-<p>{{ error_msg|safe }}</p>
+<div class="tile" style="text-align:left;">
+<font class="lead">Something error happened</font>
+<p>{{ msg|safe }}</p>
 <br>
 <a href="{{ url_for('index') }}">BACK TO INDEX</a>
+</div>
 {% endblock %}

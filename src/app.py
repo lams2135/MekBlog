@@ -26,17 +26,17 @@ def archive_index():
 	else:
 		opt = {}
 	archive_list = mekblog.archive.list_all(opt)
-	tag_list = [{'tag':x.keys()[0],'count':x.values()[0]} for x in mekblog.tag.collection]
-	return render_template('archive_index.html', archive_list=archive_list, tag_list=tag_list)
+	tag_list = mekblog.tag.get_list()
+	return render_template('archive-index.html', archive_list=archive_list, tag_list=tag_list, session=session)
 
 @app.route('/archives/<small_title>')
-def read_archives(small_title):
+def read_archive(small_title):
 	archive = mekblog.archive.list_one({'small-title': small_title})
 	if archive == None:
 		abort(404)
 	else:
-		tag_list = [{'tag':x.keys()[0],'count':x.values()[0]} for x in mekblog.tag.collection]
-		return render_template('archive.html', archive=archive, tag_list=tag_list)
+		tag_list = mekblog.tag.get_list()
+		return render_template('archive.html', archive=archive, tag_list=tag_list, session=session)
 
 # TODO : add review functions
 
@@ -52,10 +52,10 @@ def login():
 	else:
 		if 'username' in request.form and 'password' in request.form:
 			if request.form['username'] == mekblog.config.settings['root-user'] and request.form['password'] ==  mekblog.config.settings['root-passwd']:
-				session['admin'] = 'YES'
+				session['admin'] = mekblog.config.settings['root-user']
 				return redirect(url_for('admin'))
 			else:
-				return render_template('error.html', error_msg="Wrong account or password")
+				return render_template('info.html', msg="Wrong account or password")
 		else:
 			abort(404)
 
@@ -80,19 +80,53 @@ def new_archive():
 		return render_template('new-archive.html')
 	else:
 		# TODO: forward: check script
+		# TODO: forward: rich-text editor
 		result, msg = mekblog.archive.post({
 			'title': request.form['title'],
-			'small-title': mekblog.security.antiXSS(request.form['small-title']),
+			'small-title': request.form['small-title'],
 			'content': request.form['content'],
-			'tag': request.form['tag'],
+			'tag': request.form['tag']
 		})
 		# TODO: make error & alert page unified
 		if not result:
-			return render_template('error.html', error_msg=msg)
+			return render_template('info.html', msg=msg)
 		else:
 			mekblog.tag.insert(request.form['tag'])
-			return redirect(url_for('index'))
-	
+			return redirect(url_for('archive_index'))
+
+@app.route('/edit-archive', methods=['GET', 'POST'])
+def edit_archive():
+	if 'admin' not in session:
+		abort(403)
+	if request.method == 'GET':
+		if 'st' not in request.args:
+			abort(404)
+		archive = mekblog.archive.list_one({'small-title': request.args['st']})
+		if archive == None:
+			abort(404)
+		return render_template('edit-archive.html', archive=archive)
+	if request.method == 'POST':
+		result, msg = mekblog.archive.update({
+			'title': request.form['title'],
+			'small-title': request.form['small-title'],
+			'content': request.form['content'],
+			'tag': request.form['tag']
+		})
+		if not result:
+			return render_template('info.html', msg=msg)
+		else:
+			# TODO: improve tag function
+			return redirect(url_for('read_archive', small_title=request.form['small-title']))
+
+@app.route('/remove-archive')
+def remove_archive():
+	if 'admin' not in session:
+		abort(403)
+	if 'st' not in request.args:
+		abort(404)
+	mekblog.archive.remove({'small-title': request.args['st']})
+	return redirect(url_for('archive_index'))
+
 # TODO: ajax access page
 
 # run as __main__

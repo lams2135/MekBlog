@@ -1,20 +1,40 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="row">
-	<div class="col-sm-9">
-		{% block container %}
-		{% endblock %}
-	</div>
-	<div class="col-sm-3">
-		{% block sidebar %}
-		<div class="tile opacity">
-		  <h6>hot tags</h6>
-		  {% for item in tag_list %}
-		  <a href="{{ url_for('archive_index',tag=item['tag']) }}">{{ item['tag'] }}</a>
-		  <font>[debug num={{ item['count'] }}] | </font>
-		  {% endfor %}
-		</div>
-		{% endblock %}
-	</div>
+  <div class="col-sm-9">
+    {% block container %}
+    {% endblock %}
+  </div>
+  <div class="col-sm-3">
+    {% block sidebar %}
+    {% if 'admin' in session %}
+    <div class="tile opacity archive-view">
+      <table>
+	<tr class="admin-tool">
+	  <th class="admin-tool-cell"><b>Admin</b></th>
+	  <th class="admin-tool-cell"><a href="{{ url_for('new_archive') }}" class="fui-new"></a></th>
+	  {% block admintool %}
+	  {% endblock %}
+	  <th class="admin-tool-cell"><span class="fui-gear"></span></th>
+	  <th class="admin-tool-cell"><a href="{{ url_for('logout') }}"class="fui-lock"></a></th>
+	</tr>
+      </table>
+    </div>
+    <br>
+    {% endif %}
+    <div class="tile opacity">
+      <div>
+      </div>
+      <div class="archive-view">
+	<font class="lead">hot tags</font>
+	{% for item in tag_list %}
+	<br>
+	<a href="{{ url_for('archive_index',tag=item['tag']) }}" >{{ item['tag'] }}</a>
+	<font>:{{ item['count'] }}</font>
+	{% endfor %}
+      </div>
+    </div>
+    {% endblock %}
+  </div>
 </div>
 {% endblock %}

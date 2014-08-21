@@ -5,7 +5,7 @@
   {% for item in archive_list %}
   <div>
     <div class="tile opacity archive-view">
-      <a href="{{ url_for('archive_index') }}/{{ item['small-title'] }}"><font class="lead">{{ item['title'] }}</font></a>
+      <a href="{{ url_for('read_archive', small_title=item['small-title']) }}"><font class="lead">{{ item['title'] }}</font></a>
       <small class="archive-view-time">POST at {{ item['post-time'][0:10] }}</small>
       <p >{% if item['content'].__len__()>100 %}{{ item['content'][0:100] }}{% else %}{{ item['content'] }}{% endif %}</p>
     </div>

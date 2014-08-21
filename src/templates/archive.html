@@ -1,5 +1,9 @@
 {% extends "two-column.html" %}
 {% block title %}{{ archive['title'] }}{% endblock %}
+{% block admintool %}
+<th class="admin-tool-cell"><a href="{{ url_for('edit_archive', st=archive['small-title']) }}" class="fui-eye"></a></th>
+<th class="admin-tool-cell"><a href="{{ url_for('remove_archive', st=archive['small-title']) }}" class="fui-cross"></a></th>
+{% endblock %}
 {% block container %}
 <div class="tile archive-view opacity">
 <font class="lead archive-view-title">{{ archive['title'] }}</font>

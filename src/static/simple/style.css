@@ -1,7 +1,7 @@
-body { /*
+body { 
 	background-image:url('hdbk.jpg');
 	background-attachment:fixed;
-	background-size:100% 100%;*/
+	background-size:100% 100%;
 }
 
 #head-all {
@@ -48,3 +48,12 @@ body { /*
 .archive-view-time {
 	float:right;
 }
+
+.admin-tool {
+	;
+}
+
+.admin-tool-cell {
+	padding:0px 10px 0px 0px;
+}
+

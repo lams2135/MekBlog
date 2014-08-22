@@ -2,12 +2,18 @@
 <html lang="en">
   <head>
     <title>{% block title %}{% endblock %}</title>
+    <!-- Loading jQuery -->
+    <script type="text/javascript" src="{{ url_for('static', filename='jquery/jquery-2.1.1.min.js')}}"></script>
     <!-- Loading Bootstrap -->
     <link href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <script type="text/javascript" src="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}"></script>
     <!-- Loading Flat UI -->
     <link href="{{ url_for('static', filename='Flat-UI/css/flat-ui.css') }}" rel="stylesheet">
     <!-- Loading Theme -->
     <link href="{{ url_for('static', filename='simple/style.css') }}" rel="stylesheet">
+    <!-- Loading Scripts and Components -->
+    {% block scripts %}{% endblock %}
+    <script type="text/javascript" src="{{ url_for('static', filename='forward/application.js') }}"></script>
   </head>
   <body>
     <div class="container-fluid" id="body-all">

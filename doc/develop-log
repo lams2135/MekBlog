@@ -9,5 +9,7 @@
 [2014.08.20] add: two-colume-layout
 [2014.08.21] add: edit & remove op
 [2014.08.21] add: admin sidebar
+[2014.08.22] rewrite: tagV2
+[2014.08.22] add: forward js plugin: tagsinput & tooltip
 
-[things to do] review-tree, tagv2, theme-pack, admin-panel, email, customize(index,about,sidebar), forward-script, forward-layout
+[things to do] review-tree, theme-pack, admin-panel, email, customize(index,about,sidebar), forward-script, forward-layout

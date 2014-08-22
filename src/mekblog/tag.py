@@ -3,11 +3,7 @@ import pymongo
 import mekblog
 
 collection = []
-db_connect = None
-
-def connect():
-	global db_connect
-	db_connect = mekblog.db.db_connect.MekBlog.tag
+current = None
 
 def update():
 	global collection
@@ -26,17 +22,32 @@ def update():
 		collection.append({x:tmp[x]})
 	collection.sort(cmp=lambda x,y:cmp(x.values()[0],y.values()[0]),reverse=True)
 
-def insert(inform):
-	global collection
-	tp = [x.strip() for x in inform.split(',')]
-	for x in tp:
-		for y in collection:
-			if x in y:
-				y[x] += 1
-				break
-		else:
-			collection.append({x:1})
-
-def get_list():
+def suggestion_list():
+	mekblog.tag.update()
 	global collection
 	return [{'tag':x.keys()[0],'count':x.values()[0]} for x in collection]
+
+def save():
+	db = mekblog.db.db_connect.Mekblog.piece
+	update_obj = {
+		'$set': {
+			'word': mekblog.tag.current['word']
+		}
+	}
+	db.update({'type':'tag'}, update_obj)
+
+def load():
+	global current
+	db = mekblog.db.db_connect.MekBlog.piece
+	current = db.find_one({'type':'tag'})
+	if not current:
+		current = {
+			'type': 'tag',
+			'word': []
+		}
+		db.insert(current)
+	return current
+
+def get_list():
+	return mekblog.tag.current['word']
+

@@ -35,7 +35,7 @@ def update(inform):
 	if not db_connect.find_one(query_obj):
 		return False, 'SMALL-TITLE not found'
 	update_obj = {
-		"$set": {
+		'$set': {
 			'title': inform['title'],
 			'content': inform['content'],
 			'tag': [x.strip() for x in inform['tag'].split(',')],

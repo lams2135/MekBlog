@@ -11,7 +11,7 @@
 <br>
 <small>TAG:{% for tag in archive['tag'] %}  {{ tag }}{% endfor %}</small>
 <hr>
-<p>{{ archive['content'] }}</p>
+<p>{{ archive['content']|safe }}</p>
 <br>
 <b>--EOF--</b>
 </div>

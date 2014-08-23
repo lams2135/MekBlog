@@ -129,6 +129,14 @@ def remove_archive():
 
 # TODO: ajax access page
 
+@app.route('/review/post', methods=['POST'])
+def post_review():
+	pass
+
+@app.route('/review/<small_title>')
+def get_review():
+	pass
+
 # run as __main__
 
 if __name__ == '__main__':

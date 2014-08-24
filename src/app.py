@@ -91,7 +91,6 @@ def new_archive():
 		if not result:
 			return render_template('info.html', msg=msg)
 		else:
-			mekblog.tag.insert(request.form['tag'])
 			return redirect(url_for('archive_index'))
 
 @app.route('/edit-archive', methods=['GET', 'POST'])
@@ -131,11 +130,18 @@ def remove_archive():
 
 @app.route('/review/post', methods=['POST'])
 def post_review():
-	pass
+	result, msg = mekblog.review.post({
+	})
+	if not result:
+		return jsonify({})
+	else
+		return jsonify({})
+	
 
 @app.route('/review/<small_title>')
-def get_review():
-	pass
+def get_review(small_title):
+	mekblog.review.list_by_archive(small_title)
+	return jsonify()
 
 # run as __main__
 

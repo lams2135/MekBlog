@@ -134,7 +134,7 @@ def post_review():
 	})
 	if not result:
 		return jsonify({})
-	else
+	else:
 		return jsonify({})
 	
 

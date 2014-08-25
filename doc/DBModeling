@@ -4,6 +4,6 @@
 # * volume might be large
 
 collection archive = {title:string, small-title:string, content:string, post-time:date, last-edit-time:date, tag:[string], _id:system}
-collection review = {archive-st:string, name:string, email:email, content:string, post-time:date, rev-father:id} # revfather = 0 | review._id
+collection comment = {archive-st:string, name:string, email:email, content:string, post-time:date, rev-father:id} # revfather = 0 | review._id
 collection piece = {type:string, word:obj/array}
 	{type:'tag', word:[string]}

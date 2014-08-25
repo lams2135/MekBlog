@@ -1,4 +1,5 @@
 from flask import *
+import json
 import os
 import mekblog
 
@@ -37,8 +38,6 @@ def read_archive(small_title):
 	else:
 		tag_list = mekblog.tag.get_list()
 		return render_template('archive.html', archive=archive, tag_list=tag_list, session=session)
-
-# TODO : add review functions
 
 # administrator access page
 
@@ -128,20 +127,24 @@ def remove_archive():
 
 # TODO: ajax access page
 
-@app.route('/review/post', methods=['POST'])
-def post_review():
-	result, msg = mekblog.review.post({
-	})
-	if not result:
-		return jsonify({})
-	else:
-		return jsonify({})
+@app.route('/comment/post', methods=['POST'])
+def post_comment():
+	return json.dumps(request.json)
+#	result, msg = mekblog.comment.post({
+#		'name': 's'
+#	})
+#	if not result:
+#		return jsonify({})
+#	else:
+#		return jsonify({})
 	
 
-@app.route('/review/<small_title>')
-def get_review(small_title):
-	mekblog.review.list_by_archive(small_title)
-	return jsonify()
+@app.route('/comment/list')
+def get_comment():
+	if 'st'not in request.args:
+		abort(400)
+	cmt = mekblog.comment.list_by_archive(request.args['st'])
+	return render_template('comment.piece.html', cmt_list=cmt)
 
 # run as __main__
 

@@ -7,5 +7,10 @@ mekblog_init = function() {
 	$('.show-tooltip').tooltip();
     } catch(e) {
     }
+    try {
+	$(':checkbox').checkbox();
+    } catch(e) {
+    }
 }
+
 window.onload=mekblog_init;

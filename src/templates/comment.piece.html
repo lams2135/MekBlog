@@ -1,0 +1,12 @@
+{% for item in cmt_list %}
+<li class="media" id="comment-id-{{ item['_id'] }}">
+  <div class="media-body">
+    <h4 class="media-headling">{{ item['name'] }}</h4>
+    <p>
+      {{ item['content'] }}
+      <br>
+      <small>POST at {{ item['post-time'][0:10] }}</small>
+    </p>
+  </div>
+</li>
+{% endfor %}

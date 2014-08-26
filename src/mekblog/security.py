@@ -5,7 +5,7 @@ filter_list = []
 # 0 antiXSS for RTE
 filter_list.append(re.compile("[^a-zA-Z0-9-~_]"))
 # 1 antiXSS for email
-filter_list.append(re.compile("^[a-zA-Z0-9-~_]+@[a-zA-Z0-9-~_]+.com$"))
+filter_list.append(re.compile("^[a-zA-Z0-9-_]+@[a-zA-Z0-9-_]+(.[a-zA-Z0-9-_]+)+$"))
 
 
 # filter string

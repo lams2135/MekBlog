@@ -143,4 +143,5 @@ def get_comment():
 # run as __main__
 
 if __name__ == '__main__':
-	app.run(debug=True)
+	app.DEBUG = 1
+	app.run()

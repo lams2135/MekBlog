@@ -129,15 +129,9 @@ def remove_archive():
 
 @app.route('/comment/post', methods=['POST'])
 def post_comment():
-	return json.dumps(request.json)
-#	result, msg = mekblog.comment.post({
-#		'name': 's'
-#	})
-#	if not result:
-#		return jsonify({})
-#	else:
-#		return jsonify({})
-	
+	indata = request.json
+	msg = mekblog.comment.post(indata)
+	return jsonify(msg), msg['code']
 
 @app.route('/comment/list')
 def get_comment():

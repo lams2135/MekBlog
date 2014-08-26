@@ -34,19 +34,19 @@
 	    <input type="email" placeholder="Email" id="archive-comment-post-email" class="form-control">
 	  </div>
 	  <div class="form-group">
-	    <label class="checkbox" for="archive-comment-post-enablemailnotify">
-	      <input type="checkbox" id="archive-comment-post-enablemailnotify"  data-toggle="checkbox" value="">
+	    <label class="checkbox" for="archive-comment-post-enablemailnotify-checkbox" id="archive-comment-post-enablemailnotify">
+	      <input type="checkbox" id="archive-comment-post-enablemailnotify-checkbox"  data-toggle="checkbox" value="">
 	      Enable mail notify to me by replies and new comments
 	    </label>
 	  </div>
 	</div>
 	<div class="col-sm-3">
-	  <button class="btn btn-hg btn-primary" id="archive-comment-post-submit">Comment</button>
+	  <button class="btn btn-hg btn-primary" id="archive-comment-post-submit" onclick="post_comment();">Comment</button>
 	</div>
     </div>
   </div>
   <ul class="media-list" id="archive-comment-list"></ul>
-  <script>init_comment_ui('{{ url_for('get_comment') }}', '{{ archive['small-title'] }}');</script>
+  <script>init_comment_ui('{{ url_for('get_comment') }}', '{{ url_for('post_comment') }}',  '{{ archive['small-title'] }}');</script>
 </div>
 
 {% endblock %}

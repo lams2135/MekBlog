@@ -122,6 +122,7 @@ def remove_archive():
 	if 'st' not in request.args:
 		abort(404)
 	mekblog.archive.remove({'small-title': request.args['st']})
+#	mekblog.comment.remove(request.args['st'])
 	return redirect(url_for('archive_index'))
 
 # TODO: ajax access page

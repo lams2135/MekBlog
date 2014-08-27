@@ -1,5 +1,4 @@
 import json
-import mekblog.db
 
 settings = {}
 
@@ -8,7 +7,6 @@ def load(filename):
 	fp = open(filename, 'r')
 	settings = json.load(fp)
 	fp.close()
-	mekblog.db.connect()
 	return settings
 
 # better not pass 'obj' as argument

@@ -9,7 +9,6 @@ app = Flask(__name__)
 app.secret_key = os.urandom(24)
 mekblog.config.load('config.json')
 mekblog.db.connect()
-mekblog.archive.connect()
 mekblog.tag.update()
 mekblog.tag.load()
 

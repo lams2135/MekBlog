@@ -12,5 +12,6 @@
 [2014.08.22] rewrite: tagV2
 [2014.08.22] add: forward js plugin: tagsinput & tooltip
 [2014.08.23] add: proposal for review
+[2014.08.26] add: comment-v2
 
-[things to do] review-tree, theme-pack, admin-panel, notifier, refactory, email, customize(index,about,sidebar), forward-script, forward-layout
+[things to do] comment-tree, theme-pack, admin-panel, notifier, refactory, email, customize(index,about,sidebar), forward-script, forward-layout

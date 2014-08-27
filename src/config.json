@@ -3,5 +3,10 @@
 	"root-passwd":"lovecirculation",
 	"db-host":"localhost",
 	"db-port":27017,
-	"archives-in-a-page":20
+	"archives-in-a-page":20,
+
+	"email-server-post":"stmp.126.com",
+	"email-server-port":25,
+	"email-user-name":"MekBlog2135@126.com",
+	"email-user-password":"@@MekBlog2135"
 }

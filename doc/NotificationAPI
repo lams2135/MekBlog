@@ -1,0 +1,35 @@
+# package: mekblog.notification
+# the designing mode is like LISTENER MODE but relationships
+# between publishers and subsribers are MANY-TO-MANY
+
+# a EVENT is typed as ANSI string
+
+# register a publisher, return <BOOL, STRING>
+mekblog.notification.register_publisher(event, publisher_obj)
+
+# publisher_obj is a introduction to subscribers that can be get
+# example:
+publisher_obj = {
+	'name': <APP/EXT-NAME(UNIQUE)>,
+	'description': <FORMAT OF EVENT OBJECT WOULD BE PASSED:dict>
+	# other useful thing
+}
+
+# remove a publisher, return <BOOL, STRING>
+mekblog.notification.remove_publisher(event, publisher_name)
+
+# register a subscriber, return <BOOL, STRING>
+mekblog.notification.register_subscriber(event, subscriber_obj)
+
+# subscriber_obj includes app/ext name and response callable object
+# example:
+subscriber_obj = {
+	'name': <APP/EXT-NAME(UNIQUE)>,
+	'response-method': <OBJECT with '__call__' method(CALLABLE)>
+}
+
+# remove a subscriber, return <BOOL, STRING>
+mekblog.notification.register_subscriber(event, subscriber_name)
+
+# list all publishers of a event, return list of publisher_obj
+mekblog.notification.list_publisher(event)

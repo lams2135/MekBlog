@@ -23,11 +23,21 @@ def post(obj):
 	db = mekblog.db.db_connect.MekBlog.comment
 	if db.find_one(obj):
 		return {'result': False, 'code':406, 'msg': 'repeated comment'}
-	obj['post-time'] = datetime.datetime.utcnow().isoformat()
-	db.insert(obj)
+	db.insert({
+		'name': obj['name'],
+		'email': obj['email'],
+		'content': obj['content'],
+		'archive-st': obj['archive-st'],
+		'reply-to': obj['reply-to'],
+		'enable-notify': obj['enable-notify'],
+		'post-time': datetime.datetime.utcnow().isoformat()
+	})
 	return {'result': True, 'code':201}
 
 # EDIT method is not supported cause our design-philosopy
 # - People should be RESPONSIBLE for their behavior
 
 # REMOVE method is only accessable for admin
+def remove(st):
+	db = mekblog.db.db_connect.MekBlog.comment
+	db.remove({'archive-st':st})

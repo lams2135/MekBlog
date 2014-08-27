@@ -2,4 +2,4 @@ bin
 *.pyc
 *.odt
 *~
-test.html
+test.*

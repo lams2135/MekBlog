@@ -2,30 +2,26 @@ import smtplib
 import sys, os, string
 import email.mime.text
 
-
-settings = {}
-
-# test mode
-if __name__ == "__main__":
-	import json
-	fp = open("test.json")
-	settings = json.load(fp)
-	fp.close()
-# normal mode
-else:
-	import mekblog.config
-	settings = mekblog.config.settings
-
-# check message
-try:
-	email_user_name = settings["email-user-name"]
-	email_user_password = settings["email-user-password"]
-	email_server_host = settings["email-server-host"]
-	email_server_port = settings["email-server-port"]
-except Exception, e:
-	raise e
-
 def sendMail(to_addr, content, title="This is a MekBlog's email"):
+	settings = {}
+	# test mode
+	if __name__ == "__main__":
+		import json
+		fp = open("test.json")
+		settings = json.load(fp)
+		fp.close()
+	# normal mode
+	else:
+		import mekblog.config
+		settings = mekblog.config.settings
+	# check message
+	try:
+		email_user_name = settings["email-user-name"]
+		email_user_password = settings["email-user-password"]
+		email_server_host = settings["email-server-host"]
+		email_server_port = settings["email-server-port"]
+	except Exception, e:
+		raise e
 	# check type
 	if (type(to_addr) != list) and (type(to_addr) != tuple):
 		if __name__ != "__main__":

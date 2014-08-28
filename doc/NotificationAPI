@@ -26,6 +26,7 @@ mekblog.notification.register_subscriber(event, subscriber_obj)
 subscriber_obj = {
 	'name': <APP/EXT-NAME(UNIQUE)>,
 	'response-method': <OBJECT with '__call__' method(CALLABLE)>
+	# NOTICE: the only argument passed is EVENT OBJECT
 }
 
 # remove a subscriber, return <BOOL, STRING>

@@ -2,7 +2,7 @@ import mekblog
 
 notify_list = {}
 
-def init_event(name):
+def init_event(event):
 	notify_list[event] = {'publisher': [], 'subscriber': []}
 
 def register_publisher(event, obj):
@@ -51,6 +51,6 @@ def publish(event, obj):
 	for x in notify_list[event]['subscriber']:
 		try:
 			x['response-method'](obj)
-		except e:
-			print e
+		except:
+			print "EXCEPTION"
 

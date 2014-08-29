@@ -48,9 +48,9 @@ def sendMail(content, to_addr=-1, title="This is a MekBlog's email"):
 	except Exception, e:
 		raise ValueError("lack email-server-port")
 	try:
-		email_server_port + ""
+		email_server_port + 1
 	except Exception, e:
-		raise TypeError("email-server-port not a %s, but a %s", str, type(email_server_port))
+		raise TypeError("email-server-port not a %s, but a %s", int, type(email_server_port))
 	# check type
 	if (type(to_addr) != list) and (type(to_addr) != tuple):
 		if __name__ != "__main__":

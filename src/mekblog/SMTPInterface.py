@@ -50,7 +50,7 @@ def sendMail(content, to_addr=-1, title="This is a MekBlog's email"):
 	try:
 		email_server_port + 1
 	except Exception, e:
-		raise TypeError("email-server-port not a %s, but a %s", int, type(email_server_port))
+		raise TypeError("email-server-port not a %s, but a %s", str, type(email_server_port))
 	# check type
 	if (type(to_addr) != list) and (type(to_addr) != tuple):
 		if __name__ != "__main__":
@@ -64,7 +64,8 @@ def sendMail(content, to_addr=-1, title="This is a MekBlog's email"):
 	except Exception, e:
 		raise TypeError("Email title not a %s but a %s"% type(str), type(title))
 	# if to_addr == -1, send to myself
-	to_addr = (settings["email-user-name"])
+	if to_addr == -1:
+		to_addr = (settings["email-user-name"])
 	#create a SMTP object
 	smtp = smtplib.SMTP()
 	#set debug level

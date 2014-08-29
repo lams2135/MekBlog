@@ -16,5 +16,6 @@
 [2014.08.26] add: isEmailAddress function
 [2014.08.27] add: notification center
 [2014.08.29] add: proposal of adminpanel
+[2014.08.29] add: SMTPInsterface(email)
 
-[things to do] comment-tree, theme-pack, i18n-tool, admin-panel, notifier, refactory, email, customize(index,about,sidebar)
+[things to do] comment-tree, theme-pack, i18n-tool, admin-panel, notifier, refactory, customize(index,about,sidebar)

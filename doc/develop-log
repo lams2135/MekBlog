@@ -11,9 +11,10 @@
 [2014.08.21] add: admin sidebar
 [2014.08.22] rewrite: tagV2
 [2014.08.22] add: forward js plugin: tagsinput & tooltip
-[2014.08.23] add: proposal for review
+[2014.08.23] add: proposal of comment
 [2014.08.26] add: comment-v2
 [2014.08.26] add: isEmailAddress function
 [2014.08.27] add: notification center
+[2014.08.29] add: proposal of adminpanel
 
-[things to do] comment-tree, theme-pack, admin-panel, notifier, refactory, email, customize(index,about,sidebar)
+[things to do] comment-tree, theme-pack, i18n-tool, admin-panel, notifier, refactory, email, customize(index,about,sidebar)

@@ -48,7 +48,7 @@ def sendMail(content, to_addr=-1, title="This is a MekBlog's email"):
 	except Exception, e:
 		raise ValueError("lack email-server-port")
 	try:
-		email_server_port + 1
+		email_server_port + ""
 	except Exception, e:
 		raise TypeError("email-server-port not a %s, but a %s", str, type(email_server_port))
 	# check type

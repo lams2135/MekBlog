@@ -1,3 +1,4 @@
+# CORE CONFIG
 root-user:string
 root-passwd:string
 db-host:string
@@ -6,3 +7,5 @@ archives-in-a-page:20
 
 theme:[{name:string, src:string}]
 
+# EXTENSION CONFIG
+# ...

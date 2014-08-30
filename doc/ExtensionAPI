@@ -3,19 +3,24 @@
 
 # file structure
 $ROOT:
-	extension.json
-	__init__.py
-	template:
+	extension.json # MUST INCLUDED
+	__init__.py # MUST INCLUDED
+	templates:
 	static:
 
 # extension.json
 {
-	<EXTENSION_INFO>,
+	# EXTENSION_INFO
+	name: <STRING>,
+	template: <DIR OR 'NULL'>,
+	static: <DIR OR 'NULL'>,
 
+	# CONFIG
 	config: {
 		<CONFIG_ITEMS>: <INITIAL>
 	},
 
+	# ADMIN-PANEL
 	admin: {
 		<BLOCKS>: [
 			{
@@ -28,4 +33,20 @@ $ROOT:
 	}
 }
 
-# VIEW
+# __init__ should define a CALLABLE OBJECT that would be called
+# before app.run() by mekblog.extension
+
+# VIEW object(flask.Module) must been constructed in the module's
+# main namespace (__init__) and named as 'view_obj'
+# e.g.: __init.__.py
+view_obj = flask.Module(__name__)
+# @view_obj.route(...)
+# ...
+
+# things in templates/ and static/ would copy to $MEKBLOG_TEMPLATE/<EXTENSION_NAME>/ and $MEKBLOG_STATIC/<EXTENSION_NAME>/
+# so that you may use render_template('<EXTENSION_NAME>/...', ...)
+# we may provide more graceful API later to deal with templates and static files
+
+# use mekblog.notification to make extensions removable and highly stable
+# use mekblog.config and mekblog.adminpanel to make configures easy
+# to manage with AUTOMATICALLY generated administrator page

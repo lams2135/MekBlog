@@ -1,0 +1,31 @@
+# API for extension
+# root-folder as $ROOT
+
+# file structure
+$ROOT:
+	extension.json
+	__init__.py
+	template:
+	static:
+
+# extension.json
+{
+	<EXTENSION_INFO>,
+
+	config: {
+		<CONFIG_ITEMS>: <INITIAL>
+	},
+
+	admin: {
+		<BLOCKS>: [
+			{
+				<TITLE>:
+				<DESCRIPTION>:
+				<INPUT_TYPE>:
+				<CONFIG_ID>:
+			}
+		]
+	}
+}
+
+# VIEW

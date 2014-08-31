@@ -34,16 +34,13 @@ $ROOT:
 }
 
 # __init__ should define a CALLABLE OBJECT that would be called
-# before app.run() by mekblog.extension
+# before app.run() by mekblog.extension and pass it to
+# mekblog.extension.register_initial()
 
-# VIEW object(flask.Module) must been constructed in the module's
-# main namespace (__init__) and named as 'view_obj'
-# e.g.: __init.__.py
-view_obj = flask.Module(__name__)
-# @view_obj.route(...)
-# ...
+# VIEW object(flask.Module) must been constructed with name param as
+# $EXTENSION_NAME then pass it to mekblog.extension.register_view()
 
-# things in templates/ and static/ would copy to $MEKBLOG_TEMPLATE/<EXTENSION_NAME>/ and $MEKBLOG_STATIC/<EXTENSION_NAME>/
+# things in templates/ and static/ would copy to $MEKBLOG_TEMPLATE/$EXTENSION_NAME/ and $MEKBLOG_STATIC/$EXTENSION_NAME/
 # so that you may use render_template('<EXTENSION_NAME>/...', ...)
 # we may provide more graceful API later to deal with templates and static files
 

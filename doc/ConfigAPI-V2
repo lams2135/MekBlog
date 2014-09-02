@@ -1,0 +1,31 @@
+# module mekblog.config
+# version 2
+
+# API:
+
+# IO operations
+config.load(fp)
+config.save(fp)
+# fp = file name, must be json file
+# example:
+config.load('config.json')
+config.save('doubi.json')
+
+# query&update operations
+config.setting.route.get()
+config.setting.route.exist()
+config.setting.route.set()
+# route = [list of path] joined by '.'
+# invalid key in python is not allowed such as keys including '-' '?' '!' ']' … and etc
+# legal example:
+config.setting.email.host.exist()
+config.setting.core.admin.passwd.get() # raise exception if config.core.admin.passwd not existed
+config.setting.core.admin.uid.set('xxxxx')
+config.setting.core.admin.set({'uid':'xxxx','passwd':'123456'})
+
+# illegal example:
+config.setting.core.items-in-page.set(20) # illegal python key 'items-in-page'
+config.setting.core.admin.set({'uid':'xxxx','pass-wd':'123456'}) # same as the previous one
+
+
+# IF you can implement it like config.email.xxx in query&update operations (without '.setting' key in the middle), it's BETTER.

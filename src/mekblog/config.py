@@ -10,8 +10,8 @@ class settings_object(object):
 		__value__ for key to value
 		__state__:
 				unused
-				dummy
 				used
+				unknown
 	"""
 	def __init__(self):
 		super(settings_object, self).__init__()

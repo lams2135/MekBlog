@@ -1,0 +1,32 @@
+{
+  "core": {
+    "db": {
+      "hahahah": 1111
+    }, 
+    "root": {
+      "passwd": "lovecirculation", 
+      "uid": "root"
+    }
+  }, 
+  "asjkldfh": {
+    "asjkdfk": {
+      "akjssj": {}
+    }
+  }, 
+  "askdlfjh": {
+    "ahjksdgf": {
+      "ajksdhg": 123
+    }
+  }, 
+  "email": {
+    "host": "smtp.126.com", 
+    "port": 25, 
+    "user": {
+      "password": "@@MekBlog2135", 
+      "name": "MekBlog2135@126.com"
+    }
+  }, 
+  "archive": {
+    "items-in-a-page": 20
+  }
+}

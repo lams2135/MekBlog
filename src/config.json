@@ -1,12 +1,25 @@
 {
-	"root-user":"root",
-	"root-passwd":"lovecirculation",
-	"db-host":"localhost",
-	"db-port":27017,
-	"archives-in-a-page":20,
+  "core":{
+    "root":{
+      "uid":"root",
+      "passwd":"lovecirculation"
+    },
+    "db":{
+      "host":"localhost",
+      "port":27017
+    }
+  },
 
-	"email-server-host":"smtp.126.com",
-	"email-server-port":25,
-	"email-user-name":"MekBlog2135@126.com",
-	"email-user-password":"@@MekBlog2135"
+  "archive":{
+    "items-in-a-page":20
+  },
+
+  "email":{
+    "host":"smtp.126.com",
+    "port":25,
+    "user":{
+      "name":"MekBlog2135@126.com",
+      "password":"@@MekBlog2135"
+    }
+  }
 }

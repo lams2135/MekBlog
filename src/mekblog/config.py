@@ -76,6 +76,12 @@ class settings_object(object):
 
 setting = settings_object()
 
+def load(fn):
+	setting.load(fn)
+
+def save(fn):
+	setting.save(fn)
+
 if __name__ == "__main__":
 
 	setting.load("test.json")

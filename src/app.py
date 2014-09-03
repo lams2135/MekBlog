@@ -49,13 +49,13 @@ def login():
 			return render_template('login.html')
 	else:
 		if 'username' in request.form and 'password' in request.form:
-			if request.form['username'] == mekblog.config.settings['root-user'] and request.form['password'] ==  mekblog.config.settings['root-passwd']:
-				session['admin'] = mekblog.config.settings['root-user']
-				return redirect(url_for('admin'))
-			else:
-				return render_template('info.html', msg="Wrong account or password")
+			if request.form['username'] == mekblog.config.setting.core.root.uid.get():
+				if request.form['password'] ==  mekblog.config.setting.core.root.passwd.get():
+					session['admin'] = mekblog.config.setting.core.root.uid.get()
+					return redirect(url_for('admin'))
+			return render_template('info.html', msg="Wrong account or password")
 		else:
-			abort(404)
+			abort(400)
 
 @app.route('/logout')
 def logout():
@@ -66,7 +66,7 @@ def logout():
 @app.route('/admin')
 def admin():
 	if 'admin' in session:
-		return render_template('admin.html', root_user=mekblog.config.settings['root-user'])
+		return render_template('admin.html', root_user=mekblog.config.setting.core.root.uid.get())
 	else:
 		abort(403)
 

@@ -61,16 +61,16 @@ class settings_object(object):
 	def set(self, set_dict):
 		def set_travel(settings, set_dict):
 			if type(set_dict) != dict:
-				settings[0].__value__ = set_dict
+				settings.__value__ = set_dict
 			else:
-				settings[0].__tree_dict__ = {}
+				settings.__tree_dict__ = {}
 				for x,y in set_dict.items():
-					settings[0].__tree_dict__.setdefault(x, settings_object())
-					set_travel([settings[0].__tree_dict__[x]], y)
+					settings.__tree_dict__.setdefault(x, settings_object())
+					set_travel(settings.__tree_dict__[x], y)
 			#	print settings[0].__tree_dict__
 		self.__tree_dict__ = unused
 		self.__value__ = unused
-		set_travel([self], set_dict)
+		set_travel(self, set_dict)
 	def exist(self):
 		return True
 

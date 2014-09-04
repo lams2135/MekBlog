@@ -1,57 +1,33 @@
 import smtplib
 import sys, os, string
 import email.mime.text
+if __name__ == "__main__":
+	import config
+else:
+	import mekblog.config
 
 def sendMail(content, to_addr=-1, title="This is a MekBlog's email"):
 	settings = {}
 	# test mode
 	if __name__ == "__main__":
-		import json
-		fp = open("test.json")
-		settings = json.load(fp)
-		fp.close()
+		settings = config.settings_object()
+		settings.load("test.json")
 	# normal mode
 	else:
-		import mekblog.config
 		settings = mekblog.config.settings
 	# check message
 	# email-user-name
-	try:
-		email_user_name = settings["email-user-name"]
-	except Exception, e:
-		raise ValueError("lack email-user-name")
-	try:
-		email_user_name + ""
-	except Exception, e:
-		raise TypeError("email-user-name not a %s, but a %s", str, type(email_user_name))
+	email_user_name = settings.email.user.name.get()
 	# email-user-password
-	try:
-		email_user_password = settings["email-user-password"]
-	except Exception, e:
-		raise ValueError("lack email-user-password")
-	try:
-		email_user_password + ""
-	except Exception, e:
-		raise TypeError("email-user-password not a %s, but a %s", str, type(email_user_password))
+	email_user_password = settings.email.user.password.get()
 	# email-server-host
-	try:
-		email_server_host = settings["email-server-host"]
-	except Exception, e:
-		raise ValueError("lack email-server-host")
-	try:
-		email_server_host + ""
-	except Exception, e:
-		raise TypeError("email-server-host not a %s, but a %s", str, type(email_server_host))
+	email_server_host = settings.email.host.get()
 	# email-server-port
-	try:
-		email_server_port = settings["email-server-port"]
-	except Exception, e:
-		raise ValueError("lack email-server-port")
-	try:
-		email_server_port + 1
-	except Exception, e:
-		raise TypeError("email-server-port not a %s, but a %s", int, type(email_server_port))
+	email_server_port = settings.email.port.get()
 	# check type
+	# if to_addr == -1, send to myself
+	if to_addr == -1:
+		to_addr = (settings.email.user.name.get())
 	if (type(to_addr) != list) and (type(to_addr) != tuple):
 		if __name__ != "__main__":
 			raise TypeError
@@ -63,9 +39,6 @@ def sendMail(content, to_addr=-1, title="This is a MekBlog's email"):
 		title+""
 	except Exception, e:
 		raise TypeError("Email title not a %s but a %s"% type(str), type(title))
-	# if to_addr == -1, send to myself
-	if to_addr == -1:
-		to_addr = (settings["email-user-name"])
 	#create a SMTP object
 	smtp = smtplib.SMTP()
 	#set debug level

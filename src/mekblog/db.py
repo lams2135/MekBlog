@@ -14,3 +14,4 @@ def connect():
 		conn = pymongo.Connection('0.0.0.0', 27017)
 		raise ValueError('mekblog.config not load or missing keys')
 	db_connect = conn
+

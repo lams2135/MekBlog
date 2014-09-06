@@ -14,15 +14,16 @@ def init():
 	pass
 
 def load(ext):
-	# get path and extension.json
+	# get path and load extension.json
 	# pkg = json.load()
 	# name check
 	# for x in ext_lists:
 	# 	if x['name'] == pkg['name']
 	# 		raise Error
-	# load extension.json
 	# put in config
-	# register in adminpanel ( del
+	# if name not in conf.extension
+	# 	conf.extension.name.set()
+	# !! notice version differences
 	# import module
 	# register initial
 	# register view
@@ -36,6 +37,9 @@ def disable(ext):
 	pass
 
 def unload(ext):
+	pass
+
+def run_initial():
 	pass
 
 # interface to extensions

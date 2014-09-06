@@ -1,4 +1,4 @@
-import mekblog
+# package notification
 
 notify_list = {}
 

@@ -18,5 +18,6 @@
 [2014.08.29] add: proposal of adminpanel
 [2014.08.29] add: SMTPInsterface(email)
 [2014.08.30] add: proposal of extension platform with guide-doc
+[2014.09.04] rewrite: configV2
 
-[things to do] comment-tree, theme-pack, i18n-tool, admin-panel, notifier, refactory, customize(index,about,sidebar)
+[things to do] comment-tree, theme-pack, i18n-tool, (platform), refactory, customize(index,about,sidebar)

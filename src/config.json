@@ -10,6 +10,10 @@
     }
   },
 
+  "extension":{
+    "active":["email"]
+  },
+
   "archive":{
     "items-in-a-page":20
   },

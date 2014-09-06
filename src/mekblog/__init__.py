@@ -5,6 +5,6 @@ import comment
 import tag
 import security
 import notification
-import adminpanel
 import SMTPInterface
-import extension
+# import adminpanel
+# import extension

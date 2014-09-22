@@ -4,7 +4,7 @@ import mekblog.notification
 import flask
 import json
 
-ext_lists = []
+ext_list = []
 
 # interface to mekblog
 

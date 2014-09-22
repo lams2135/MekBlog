@@ -12,6 +12,7 @@ $ROOT:
 {
 	# EXTENSION_INFO
 	name: <STRING>,
+	version: <STRING>,
 	template: <DIR OR 'NULL'>,
 	static: <DIR OR 'NULL'>,
 

@@ -7,15 +7,18 @@
     "db":{
       "host":"localhost",
       "port":27017
+    },
+    "extension":{
+      "dir":"extension",
+      "active":["email"]
     }
-  },
-
-  "extension":{
-    "active":["email"]
   },
 
   "archive":{
     "items-in-a-page":20
+  },
+
+  "extension":{
   },
 
   "email":{

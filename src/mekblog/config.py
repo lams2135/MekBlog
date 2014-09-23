@@ -1,4 +1,5 @@
 import json
+import re
 
 unused = "!<---u-n-u-s-e-d--->!"
 used = "!<---u-s-e-d--->!"
@@ -77,6 +78,29 @@ class settings_object(object):
 					set_travel(settings.__value__[x], y)
 		self.__value__ = unused
 		set_travel(self, set_dict)
+	def append(self, key, content):
+		if type(self.__value__) != dict:
+			raise TypeError("The object must be a dict")
+		try:
+			key+""
+		except:
+			raise TypeError("key's type isn't string")
+		try:
+			self.__value__[key]
+			raise KeyError("The dict has the key %s already." %key)
+		except:
+			self.__value__.setdefault(key, settings_object())
+			self.__value__[key].set(content)
+
+	def cd(self, route):
+		l = re.split("\.", route)
+		ret = self
+		for i in l:
+			#print i
+			ret = ret.__getattr__(i)
+		return ret
+
+
 	def exist(self):
 		return True
 
@@ -94,7 +118,9 @@ if __name__ == "__main__":
 	print setting.core.db.exist()
 	print setting.core.db.get()
 	setting.core.db.set({"hahahah":1111})
+	setting.core.db.append("123123",{"123123":"123123", "111":"111"})
 	setting.askdlfjh.ahjksdgf.ajksdhg.set(123)
+	print setting.cd("askdlfjh.ahjksdgf.ajksdhg").get()
 	setting.asjkldfh.asjkdfk.akjssj.set({})
 	setting.save("tt.json")
 

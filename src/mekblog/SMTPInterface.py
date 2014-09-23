@@ -4,7 +4,20 @@ import email.mime.text
 if __name__ == "__main__":
 	import config
 else:
-	import mekblog.config
+	import mekblog
+
+def sendEventHandler(obj):
+	try:
+		obj['content']
+		obj['to_addr']
+		obj['title']
+	except Exception, e:
+		raise TypeError('Unavaliable event object received.')
+	sendMail(obj['content'], obj['to_addr'], obj['title'])
+
+# set up SMTP service listening
+subscriber_obj = {'name':'email.sendmail', 'response-method':sendEventHandler}
+mekblog.notification.register_subscriber('email.sendmail', subscriber_obj)
 
 def sendMail(content, to_addr=-1, title="This is a MekBlog's email"):
 	settings = {}

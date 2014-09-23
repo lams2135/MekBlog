@@ -35,33 +35,32 @@ class settings_object(object):
 			self.__value__.setdefault(name, settings_object())
 		self.__state__ = unknown
 		return self.__value__[name]
-	def get(self):
-		def get_travel(settings):
-			if settings.__state__ == unused:
-				return False, None
-			elif type(settings.__value__) == dict:
-				# check if client set a empty dict like {}
-				exist = (settings.__state__ == used)
-				get_dict = {}
-				for x, y in settings.__value__.items():
-					exist_tmp, get_dict_tmp = get_travel(settings.__value__[x])
-					if exist_tmp == True:
-						get_dict[x] = get_dict_tmp
-						exist = True
-				if exist == True:
-					settings.__state__ = used
-				else:
-					settings.__state__ = unused	
-				return exist, get_dict
-			elif settings.__value__ != unused:
+
+	def get_travel(self,settings):
+		if settings.__state__ == unused:
+			return False, None
+		elif type(settings.__value__) == dict:
+			# check if client set a empty dict like {}
+			exist = (settings.__state__ == used)
+			get_dict = {}
+			for x, y in settings.__value__.items():
+				exist_tmp, get_dict_tmp = self.get_travel(settings.__value__[x])
+				if exist_tmp == True:
+					get_dict[x] = get_dict_tmp
+					exist = True
+			if exist == True:
 				settings.__state__ = used
-				return True, settings.__value__
 			else:
-				settings.__state__ = unused
-				return False, None
-
-
-		exist, get_dict = get_travel(self)
+				settings.__state__ = unused	
+			return exist, get_dict
+		elif settings.__value__ != unused:
+			settings.__state__ = used
+			return True, settings.__value__
+		else:
+			settings.__state__ = unused
+			return False, None
+	def get(self):
+		exist, get_dict = self.get_travel(self)
 		if exist == False:
 			raise KeyError("Illegal route")
 		return get_dict
@@ -74,8 +73,7 @@ class settings_object(object):
 			else:
 				settings.__value__ = {}
 				for x,y in set_dict.items():
-					settings.__value__.setdefault(x, settings_object())
-					set_travel(settings.__value__[x], y)
+					self.append(x,y)
 		self.__value__ = unused
 		set_travel(self, set_dict)
 	def append(self, key, content):
@@ -85,6 +83,8 @@ class settings_object(object):
 			key+""
 		except:
 			raise TypeError("key's type isn't string")
+		if '.' in key:
+			raise KeyError("Key can't contain char '.'")
 		try:
 			self.__value__[key]
 			raise KeyError("The dict has the key %s already." %key)
@@ -102,7 +102,8 @@ class settings_object(object):
 
 
 	def exist(self):
-		return True
+		state, get_dict = self.get_travel(self)
+		return state
 
 setting = settings_object()
 
@@ -118,9 +119,12 @@ if __name__ == "__main__":
 	print setting.core.db.exist()
 	print setting.core.db.get()
 	setting.core.db.set({"hahahah":1111})
-	setting.core.db.append("123123",{"123123":"123123", "111":"111"})
+	setting.core.db.append("123123",{"123//123":"123123", "111":"111"})
 	setting.askdlfjh.ahjksdgf.ajksdhg.set(123)
 	print setting.cd("askdlfjh.ahjksdgf.ajksdhg").get()
+	print setting.cd("askdlfjh.ahjksdgf.ajksdhg").exist()
+	print setting.cd("askdlfjh.ahjksdgf.ajdhg").exist()
 	setting.asjkldfh.asjkdfk.akjssj.set({})
+	setting.core.db.append("123.123",{"123//123":"123123", "111":"111"})
 	setting.save("tt.json")
 

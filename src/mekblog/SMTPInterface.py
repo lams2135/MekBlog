@@ -13,6 +13,7 @@ def sendEventHandler(obj):
 		obj['title']
 	except Exception, e:
 		raise TypeError('Unavaliable event object received.')
+		return
 	sendMail(obj['content'], obj['to_addr'], obj['title'])
 
 # set up SMTP service listening

@@ -1,13 +1,30 @@
 {
-	name:"test_walter",
-	version:"0.0.0.1",
-	template:"NULL",
-	static:"NULL",
+	"name":"test_walter",
+	"version":"0.0.0.1",
+	"template":"NULL",
+	"static":"NULL",
 
-	config:{
-
+	"config":{
+		"master_addr":"lams2135@gmail.com"
 	},
 
-	admin:{
+	"admin":{
+		"block":[
+			{
+				"title":"Master mail address",
+				"row":[
+					{
+						"input_type":"text",
+						"input_property":[
+							{
+								"id":"master-addr",
+								"class":...,
+								"value":"xxxx # bind to config ?"
+							}
+						],
+					}
+				]
+			}
+		]
 	}
 }

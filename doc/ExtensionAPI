@@ -23,12 +23,16 @@ $ROOT:
 
 	# ADMIN-PANEL
 	admin: {
-		<BLOCKS>: [
+		block: [
 			{
-				<TITLE>:
-				<DESCRIPTION>:
-				<INPUT_TYPE>:
-				<CONFIG_ITEM>:
+				title:<STRING>,
+				row: [
+					{
+						input_type:<ENUM STRING(text, checkbox ...)>,
+						input_property:[],
+						input_content:<STRING>
+					}
+				]
 			}
 		]
 	}

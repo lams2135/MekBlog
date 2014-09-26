@@ -1,6 +1,4 @@
-import mekblog.adminpanel
-import mekblog.config
-import mekblog.notification
+import mekblog
 import flask
 import json
 
@@ -13,13 +11,13 @@ def init():
 	# disable all extensions
 	pass
 
-def load(ext):
+def load(pathname): # repeated calling acts reload
 	# get path and load extension.json
-	# pkg = json.load()
-	# name check
-	# for x in ext_lists:
-	# 	if x['name'] == pkg['name']
-	# 		raise Error
+	fp = (mekblog.config.settings.core.extension.d + '/' + pathname)
+	pkg = json.load(fp)
+	for x in ext_list:
+		if x['name'] == pkg['name']:
+			return
 	# put in config
 	# if name not in conf.extension
 	# 	conf.extension.name.set()
@@ -34,9 +32,6 @@ def enable(ext):
 	pass
 
 def disable(ext):
-	pass
-
-def unload(ext):
 	pass
 
 def run_initial():

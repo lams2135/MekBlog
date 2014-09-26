@@ -40,3 +40,8 @@ mekblog.notification.publish(event, event_obj)
 
 # when an event is published, Notification will call all subscribers
 # that has been listening to this event by <response-method>(event_obj)
+
+#
+event_obj = {
+	'name':<APP/EXT-NAME> # consider in certification system
+}

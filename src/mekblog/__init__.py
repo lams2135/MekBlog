@@ -1,10 +1,10 @@
 import db
-import archive
+import extension
+import notification
+# import adminpanel
 import config
+import archive
 import comment
 import tag
 import security
-import notification
 import SMTPInterface
-# import adminpanel
-# import extension

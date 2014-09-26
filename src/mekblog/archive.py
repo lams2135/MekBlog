@@ -1,6 +1,10 @@
 import datetime
 import mekblog
 
+# mekblog.archive publisher register
+publisher_obj = {'name':'mekblog.archive', 'description':'NULL'}
+mekblog.notification.register_publisher('mekblog.archive', publisher_obj)
+
 def list_all(query_obj):
 	db = mekblog.db.db_connect.MekBlog.archive
 	return db.find(query_obj).sort([('post-time', -1)])
@@ -22,6 +26,11 @@ def post(inform):
 		'last-edit-time': datetime.datetime.utcnow().isoformat()
 	}
 	db.insert(archive)
+	mekblog.notification.publish('mekblog.archive',{
+		'event':'post',
+		'title':archive['title'],
+		'time':archive['post-time']
+	})
 	return True, None
 
 def update(inform):
@@ -39,6 +48,11 @@ def update(inform):
 		}
 	}
 	db.update(query_obj, update_obj)
+	mekblog.notification.publish('mekblog.archive', {
+		'event':'update',
+		'title':update_obj['title'],
+		'time':update_obj['last-edit-time']
+	})
 	return True, None
 
 def remove(query_obj):

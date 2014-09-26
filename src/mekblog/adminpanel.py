@@ -3,7 +3,8 @@ import mekblog
 
 # TODO: mainly write a render to build HTML+JS dynamically
 
-# adminpanel_view = flask.Blueprint(__name__)
+'''
+adminpanel_view = flask.Blueprint(__name__)
 
 @adminpanel_view.route('/settings')
 def adminpanel_view_main():
@@ -17,7 +18,6 @@ def adminpanel_view_page(mod):
 		# route extension
 	pass
 
-'''
 def render_child_panel(router):
 	# router is extension name or 'core' or ''
 	# get extension information from mekblog.extension

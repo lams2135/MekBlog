@@ -1,4 +1,5 @@
 # package notification
+# TODO: add publisher's certification system and annoynous message
 
 notify_list = {}
 
@@ -46,11 +47,12 @@ def remove_subscriber(event, name):
 	return False, 'subscriber/event not found'
 
 def publish(event, obj):
+	print 'EVENT %s published' % event
 	if event not in notify_list:
 		return
 	for x in notify_list[event]['subscriber']:
 		try:
 			x['response-method'](obj)
 		except:
-			print "EXCEPTION"
+			print "EXCEPTION in event %s" % event
 

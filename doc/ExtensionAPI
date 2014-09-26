@@ -28,9 +28,9 @@ $ROOT:
 				title:<STRING>,
 				row: [
 					{
-						input_type:<ENUM STRING(text, checkbox ...)>,
-						input_property:[],
-						input_content:<STRING>
+						label:<enum STRING of input,label,p...>
+						property:[], # .id would turn to name.title.id
+						content:<STRING>
 					}
 				]
 			}

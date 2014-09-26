@@ -14,14 +14,22 @@
 				"title":"Master mail address",
 				"row":[
 					{
-						"input_type":"text",
-						"input_property":[
+						"label":"p",
+						"property":[
 							{
-								"id":"master-addr",
-								"class":...,
 								"value":"xxxx # bind to config ?"
 							}
 						],
+						"content":"set master mail to receive notifies"
+					},
+					{
+						"label":"input",
+						"property":[
+							{
+								"id":"mail",
+								"value":"..."
+							}
+						]
 					}
 				]
 			}

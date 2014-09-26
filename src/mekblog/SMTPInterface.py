@@ -17,7 +17,7 @@ def sendEventHandler(obj):
 	sendMail(obj['content'], obj['to_addr'], obj['title'])
 
 # set up SMTP service listening
-subscriber_obj = {'name':'email.sendmail', 'response-method':sendEventHandler}
+subscriber_obj = {'name':'email', 'response-method':sendEventHandler}
 mekblog.notification.register_subscriber('email.sendmail', subscriber_obj)
 
 def sendMail(content, to_addr=-1, title="This is a MekBlog's email"):

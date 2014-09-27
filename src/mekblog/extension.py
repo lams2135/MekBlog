@@ -13,15 +13,21 @@ def init():
 
 def load(pathname): # repeated calling acts reload
 	# get path and load extension.json
-	fp = (mekblog.config.settings.core.extension.d + '/' + pathname)
-	pkg = json.load(fp)
-	for x in ext_list:
-		if x['name'] == pkg['name']:
-			return
+	try:
+		epath = mekblog.config.setting.core.extension.path.get() + '/' + pathname
+		fp = open(epath+'/extension.json','r')
+		pkg = json.load(fp)
+		for x in ext_list:
+			if x['name'] == pkg['name']:
+				return
+	except Exception, e:
+		print 'ERROR in loading extension [%s]' % pathname
+		return
+	pkg['path'] = epath
 	# put in config
-	# if name not in conf.extension
-	# 	conf.extension.name.set()
-	# !! notice version differences
+	ext_list.append(pkg)
+	# load config !! notice version differences
+	# load adminpanel
 	# import module
 	# register initial
 	# register view
@@ -29,6 +35,7 @@ def load(pathname): # repeated calling acts reload
 	pass
 
 def enable(ext):
+	
 	pass
 
 def disable(ext):

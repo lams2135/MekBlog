@@ -18,3 +18,5 @@ def onload():
 
 def unload():
 	# implement interface
+	pass
+

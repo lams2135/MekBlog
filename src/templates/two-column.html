@@ -1,39 +1,38 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="row">
-  <div class="col-sm-9">
-    {% block container %}
-    {% endblock %}
-  </div>
-  <div class="col-sm-3">
-    {% block sidebar %}
-    {% if 'admin' in session %}
-    <div class="tile opacity archive-view">
-      <table>
-	<tr class="admin-tool">
-	  <th class="admin-tool-cell"><b>Admin</b></th>
-	  <th class="admin-tool-cell"><a href="{{ url_for('new_archive') }}" class="fui-new show-tooltip" data-toggle="tooltip" title="POST new archive"></a></th>
-	  {% block admintool %}
-	  {% endblock %}
-	  <th class="admin-tool-cell"><span class="fui-gear show-tooltip" data-toggle="tooltip" title="Administrator Panel"></span></th>
-	  <th class="admin-tool-cell"><a href="{{ url_for('logout') }}"class="fui-lock show-tooltip" data-toggle="tooltip" title="Logout"></a></th>
-	</tr>
-      </table>
-    </div>
-    <br>
-    {% endif %}
-    <div class="tile opacity">
-      <div>
-      </div>
-      <div class="archive-view">
-	<font class="lead">hot tags</font>
-	{% for item in tag_list %}
-	<br>
-	<a href="{{ url_for('archive_index',tag=item) }}" >{{ item }}</a>
-	{% endfor %}
-      </div>
-    </div>
-    {% endblock %}
-  </div>
-</div>
+	<div class="row">
+		<div class="col-sm-9">
+			{% block container %}
+			{% endblock %}
+		</div>
+		<div class="col-sm-3">
+			{% block sidebar %}
+				{% if 'admin' in session %}
+					<div class="tile opacity archive-view">
+						<table>
+							<tr class="admin-tool">
+								<th class="admin-tool-cell"><b>Admin</b></th>
+								<th class="admin-tool-cell"><a href="{{ url_for('new_archive') }}" class="fui-new show-tooltip" data-toggle="tooltip" title="POST new archive"></a></th>
+								{% block admintool %}
+								{% endblock %}
+								<th class="admin-tool-cell"><span class="fui-gear show-tooltip" data-toggle="tooltip" title="Administrator Panel"></span></th>
+								<th class="admin-tool-cell"><a href="{{ url_for('logout') }}"class="fui-lock show-tooltip" data-toggle="tooltip" title="Logout"></a></th>
+							</tr>
+						</table>
+					</div>
+					<br>
+				{% endif %}
+				<div class="tile opacity">
+					<div></div>
+					<div class="archive-view">
+						<font class="lead">hot tags</font>
+						{% for item in tag_list %}
+							<br>
+							<a href="{{ url_for('archive_index',tag=item) }}" >{{ item }}</a>
+						{% endfor %}
+					</div>
+				</div>
+			{% endblock %}
+		</div>
+	</div>
 {% endblock %}

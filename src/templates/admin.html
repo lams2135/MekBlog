@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% block title %}control-center{% endblock %}
 {% block content %}
-This is admin page.
-<br>
-Welcome {{ root_user }}, you can:
-<br>
-<a href="{{ url_for('new_archive') }}">POST ARCHIVE</a>
-<p> </p>
-<a href="{{ url_for('logout') }}">LOGOUT</a>
-<br>
+	This is admin page.
+	<br>
+	Welcome {{ root_user }}, you can:
+	<br>
+	<a href="{{ url_for('new_archive') }}">POST ARCHIVE</a>
+	<p> </p>
+	<a href="{{ url_for('logout') }}">LOGOUT</a>
+	<br>
 {% endblock %}

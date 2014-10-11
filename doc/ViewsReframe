@@ -1,0 +1,73 @@
+Listener Pattern(?)
+About Route Manager:
+	# After running app.py, program firstly checks all routes in mekblog and extensions, and register routes for then 
+	# And every extension can include several routes. For examples, if we see mekblog a extension, it includes: "/","/archives","/archives/<small_title>","/new-archive","/login","/logout","/admin","/edit-archive","/remove-archive","/comment/post","/comment/list"
+	# Templates Must be included
+	# And these routes names must included in extension's __init__.py. for examples, if we see mekblog a extension, it must include a list like that:
+	__init__.py:
+		routes = [ ["/", "index.html"], ["archives", "archives.html"], ...]
+
+About Function Manager:
+	# After collecting routes, we collect Background Function
+	# Every .py files only can include one Background Function named "bgfun"(this name seems not very good, so I just use it temporarily)
+	# And these function should receive a json data, this json file includes which route the user is in and other like GET data or POST data.
+	# It return a New a json data (it can change data for its function)
+	# And these function's filename and which route(s) it work for must included in extension's __init__.py. For examples, if we see mekblog a extension, it must include a list like that:
+	__init__.py:
+		bgfun_list = [ ["archives", ["/archives"], ["index", ["/"]], ....]
+
+About Template Manager:
+	# After collecting Function, we collect Template
+	# We use jinja2(temporarily?) to draw Template
+	# Every extention should contain direction "/templates","/static","/ext"
+	# "/templates" is used for "Route Manager" 's register
+	# Direction "/ext" is used for further drawing. (see Ext Template Manager)
+
+About Dependency Relationship& Mix Infomation:
+	# After collecting Template, we begin to mix what we have collected
+	# Every extension should contain a list called "Dependency"
+	# For examples, every extension's Dependency list should contain "mekblog" like that:
+		Dependency = ["mekblog"]
+	# After checking those Dependency Relationship, we get a DAG(Directed Acyclic Graph). We follow this order to mix Route, Function, Template.
+(Firstly sort all routes, bgfun_list)
+	# We follow the order to generate Templates (see Ext Templates Manager)
+	# Define a class:
+		app.py:
+			class route_class(object):
+				def __init__(self, route, fun_list, template_route):
+					...
+					self.route = route
+					self.template_route = template_route
+					self.fun_list = []
+					# fun_list follow Dependency Relationship
+					for i in fun_list:
+						if i.serve_for(self.route):
+							self.fun_list.append(i)
+
+				def work(**arg):
+					...
+					for i in self.fun_list:
+						arg = i.bgfun(arg)
+
+					return render_template(self.route, arg = self.arg)
+					
+	# For each route, we generate a instance, like that
+		app.py:
+			routes_list = []
+			for i in routes:
+				routes.append(route_class(i[0], fun_list, i[1]))
+				@app.route(i[0], methods=["GET", "POST"])
+				routes[len(routes)].work()
+
+About Ext Templates Manager:
+	# Before Mix Infomation, we should generate final Templates which are drawed and redrawed by mekblog and extensions
+	# Generating Process:
+		* Choose a origin Templates, for examples, "archives.html". 
+		* Generate a file /src/templates/archives
+		* Puts the origin file "archives.html" in this file, and rename it "1.html"
+		* Then we follow DAG to puts all extentions/***/Ext which contains this sentence "{% extends archives.html %}"
+		* For the ith (i>1) html file put into "/src/templates/archives"
+			* Puts this Ext's html into "/src/templates/archives", and rename it "i.html"
+			* Then change "{% extends archives.html %}" to "{% extends i-1.html %}"
+		* Let the last html file's name "archives.html"
+	

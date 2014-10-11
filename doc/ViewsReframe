@@ -1,7 +1,7 @@
 Listener Pattern(?)
 About Route Manager:
 	# After running app.py, program firstly checks all routes in mekblog and extensions, and register routes for then 
-	# And every extension can include several routes. For examples, if we see mekblog a extension, it includes: "/","/archives","/archives/<small_title>","/new-archive","/login","/logout","/admin","/edit-archive","/remove-archive","/comment/post","/comment/list"
+	# And every extension can include several routes. For examples, if we regard mekblog as a extension, it includes: "/","/archives","/archives/<small_title>","/new-archive","/login","/logout","/admin","/edit-archive","/remove-archive","/comment/post","/comment/list"
 	# Templates Must be included
 	# And these routes names must included in extension's __init__.py. for examples, if we see mekblog a extension, it must include a list like that:
 	__init__.py:
@@ -56,8 +56,7 @@ About Dependency Relationship& Mix Infomation:
 			routes_list = []
 			for i in routes:
 				routes.append(route_class(i[0], fun_list, i[1]))
-				@app.route(i[0], methods=["GET", "POST"])
-				routes[len(routes)].work()
+				routes[len(routes)].work() = app.route(i[0], methods=["GET", "POST"])(routes[len(routes)].work())
 
 About Ext Templates Manager:
 	# Before Mix Infomation, we should generate final Templates which are drawed and redrawed by mekblog and extensions

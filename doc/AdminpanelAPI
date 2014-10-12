@@ -1,0 +1,27 @@
+# the feature is like Github settings
+
+# layer structure of AP is [EXTENSION -> block -> row]
+# we packed HTML form elems into several marks
+# so that mark down the specific labels to make mekblog.adminpanel to create the form, and push the states to a handle function that linked to the EXTENSION
+
+# API
+
+## register will be automatically called by mekblog.extension.load
+mekblog.adminpanel.register()
+
+## when changes submitted, EXTENSION.apply_settings(obj) will be called, that means an EXTENSION with adminpanel enabled must provide this interface.
+## the handle function must return a <BOOL, STRING>, with True for succeeded, False for failed, STRING would be printed on the webpage if failed.
+## the whole submit process acts as AJAX way.
+## or we can use event system instead by direct calling handle function EXTENSION. -> discuss it
+
+
+# PACKED HTML ELEMS
+
+## p
+## label
+## inputs
+## other HTML form plugins
+
+## discuss and make detailed rules for the elems later.
+
+# WATCH examples in 'extension/test_walter'

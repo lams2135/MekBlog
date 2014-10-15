@@ -140,6 +140,15 @@ def get_comment():
 	cmt = mekblog.comment.list_by_archive(request.args['st'])
 	return render_template('comment.piece.html', cmt_list=cmt)
 
+@app.route("/settings", methods=["GET","POST"])
+def adminpanel():
+	if request.method == "GET":
+		data = dict(mekblog.config.setting.core.root.get().iterms() + mekblog.config.setting.archive.get().iterms() + mekblog.config.setting.email.get().iterms())
+		return render_template("adminpanel", data=data)
+	else:
+		# json
+		
+
 # run as __main__
 
 if __name__ == '__main__':

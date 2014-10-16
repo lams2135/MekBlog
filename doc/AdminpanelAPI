@@ -17,7 +17,16 @@ mekblog.adminpanel.register()
 
 # PACKED HTML ELEMS
 
+## BNF forms(originHTML is only fit to static elems):
+main: "adminpanel": {"enable":true|false, "block":[block(, block)*]}
+block: {"title":<STRING>, "row":[row(, row)*]}
+row: {"type":labtype, "property":prop}
+labtype: "p"|"label"|input|"originHTML"
+input: "text"|"password"|"email"|"date"|"checkbox"
+
+
 ## p
+#
 ## label
 ## inputs
 ## other HTML form plugins
@@ -25,3 +34,5 @@ mekblog.adminpanel.register()
 ## discuss and make detailed rules for the elems later.
 
 # WATCH examples in 'extension/test_walter'
+
+

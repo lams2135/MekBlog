@@ -1,12 +1,12 @@
 {
   "core": {
-    "root": {
-      "passwd": "lovecirculation", 
-      "uid": "root"
-    }, 
     "db": {
       "host": "localhost", 
       "port": 27017
+    }, 
+    "root": {
+      "passwd": "lovecirculation", 
+      "uid": "root"
     }, 
     "extension": {
       "active": [

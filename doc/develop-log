@@ -19,5 +19,6 @@
 [2014.08.29] add: SMTPInsterface(email)
 [2014.08.30] add: proposal of extension platform with guide-doc
 [2014.09.04] rewrite: configV2
+[2014.10.16] add: adminpanel
 
 [things to do] comment-tree, theme-pack, i18n-tool, (platform), refactory, customize(index,about,sidebar)

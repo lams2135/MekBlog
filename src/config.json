@@ -1,32 +1,27 @@
 {
-  "core":{
-    "root":{
-      "uid":"root",
-      "passwd":"lovecirculation"
-    },
-    "db":{
-      "host":"localhost",
-      "port":27017
-    },
-    "extension":{
-      "path":"extension",
-      "active":["email"]
+  "core": {
+    "root": {
+      "passwd": "lovecirculation", 
+      "uid": "root"
+    }, 
+    "db": {
+      "host": "localhost", 
+      "port": 27017
+    }, 
+    "extension": {
+      "active": [
+        "email"
+      ], 
+      "path": "extension"
     }
-  },
-
-  "archive":{
-    "items-in-a-page":20
-  },
-
-  "extension":{
-  },
-
-  "email":{
-    "host":"smtp.126.com",
-    "port":25,
-    "user":{
-      "name":"MekBlog2135@126.com",
-      "password":"@@MekBlog2135"
-    }
+  }, 
+  "archive": {
+    "items-in-a-page": "20"
+  }, 
+  "extension": {}, 
+  "email": {
+    "host": "smtp.126.com", 
+    "port": "25", 
+    "user": "{u'password': u'@@MekBlog2135', u'name': u'MekBlog2135@126.com'}"
   }
 }

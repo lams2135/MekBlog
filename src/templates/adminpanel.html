@@ -1,0 +1,24 @@
+{% extends "two-column.html" %}
+{% block title %} Settings {% endblock %}
+{% block container %}
+<form action="{{ url_for('adminpanel')}}" method="post" name="data">
+		<div class="row">
+			{% for i in data.items() %}
+				<div class="col-md-6">
+					<button class="btn btn-info"> {{ i[0] }}</button>
+				</div>
+				<div class="col-md-6">
+					<input type="text" class="form-control" placeholder="Default" name="{{i[0]}}" value="{{i[1]}}"/>
+				</div>
+			{% endfor %}
+			<div class="col-md-6">
+				<button class="btn btn-hg btn-primary" value="Submit">Save</button>
+			</div>
+			{% if "after-post" in signal %}
+				<div class="col-md-6">
+					<button class="btn btn-hg btn-primary" value="Submit Successfully">Submit Successfully</button>
+				</div>
+			{% endif %}
+		</div>
+	</form>
+{% endblock %}

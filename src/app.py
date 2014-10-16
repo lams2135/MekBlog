@@ -142,10 +142,28 @@ def get_comment():
 
 @app.route("/settings", methods=["GET","POST"])
 def adminpanel():
+	if "admin" not in session:
+		abort(403)
 	if request.method == "GET":
-		data = dict(mekblog.config.setting.core.root.get().iterms() + mekblog.config.setting.archive.get().iterms() + mekblog.config.setting.email.get().iterms())
-		return render_template("adminpanel", data=data)
+		data = dict(mekblog.config.setting.core.root.get().items() + mekblog.config.setting.archive.get().items() + mekblog.config.setting.email.get().items())
+		return render_template("adminpanel.html", data=data)
 	else:
+		f = mekblog.config.setting.core.root
+		form = dict(request.form)
+		# return str(form)
+		# TODO: config object's views function
+		for i in f.get().items():
+			f.cd(i[0]).set(form[i[0]][0])
+		f = mekblog.config.setting.archive
+		for i in f.get().items():
+			f.cd(i[0]).set(form[i[0]][0])
+		f = mekblog.config.setting.email
+		for i in f.get().items():
+			f.cd(i[0]).set(form[i[0]][0])
+		mekblog.config.save("config.json")
+		data = dict(mekblog.config.setting.core.root.get().items() + mekblog.config.setting.archive.get().items() + mekblog.config.setting.email.get().items())
+		signal = {"after-post":1}
+		return render_template("adminpanel.html", data=data, signal=signal)
 		# json
 		
 
